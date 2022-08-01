@@ -1,3 +1,8 @@
 <h1><%= @article.title %></h1>
 <p><%= @article.body %></p>
+<br>
 <%= link_to "<< Cofnij do listy artykułów", articles_path %>
+<br>
+<%= link_to "Edytuj artykuł", edit_article_path(@article) %>
+<br>
+<%= button_to "Usuń artykuł", article_path(@article), method: :delete, form: { data: {turbo_confirm: "Czy napewno usunąć komentarz?"}}%>

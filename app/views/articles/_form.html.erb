@@ -1,0 +1,19 @@
+<%= form_for(@article) do |form| %>
+  <ul>
+    <% @article.errors.full_messages.each do |error|%>
+      <li><%= error %></li>
+    <% end %>
+  </ul>
+
+  <p>
+    <%= form.label 'Tytuł' %>
+    <%= form.text_field :title %>
+  </p>
+  <p>
+    <%= form.label 'Treść' %>
+    <%= form.text_area :body %>
+  </p>
+  <p>
+    <%= form.submit 'Zapisz' %>
+  </p>
+<% end %>
