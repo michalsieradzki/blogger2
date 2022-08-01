@@ -1,0 +1,11 @@
+<h1>Wszystkie artykuły</h1>
+  
+  <ul id="articles">
+    <% @articles.each do |article| %>
+      <li>
+        <%= link_to article.title, article_path(article) %>
+      </li>
+    <% end %>
+  </ul>
+
+  <%= link_to "Utwórz nowy artykuł", new_article_path, class: "btn btn-primary" %>
