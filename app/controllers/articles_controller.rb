@@ -6,6 +6,10 @@ class ArticlesController < ApplicationController
 
   def show
     @article = Article.find(params[:id])
+
+    @comment = Comment.new
+    @comment.article_id = @article.id
+    
   end
 
   def new
@@ -13,17 +17,16 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = Article.new(strong_article_params)
-    @article.save
-    
+    @article = Article.create(strong_article_params)
+  
     flash.notice = "Artykuł #{@article.title} został utworzony"
     
     redirect_to article_path(@article)
   end
 
-  def delete
+  def destroy
     @article = Article.find(params[:id])
-    @article.delete
+    @article.destroy
 
     flash.notice = "Artykuł #{@article.title} został usunięty"
 
@@ -43,7 +46,7 @@ class ArticlesController < ApplicationController
     redirect_to article_path(@article)
   end
 
-
+private
 
   def strong_article_params
     params.require(:article).permit(:title, :body)

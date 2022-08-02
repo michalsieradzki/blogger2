@@ -1,6 +1,12 @@
 <h1><%= @article.title %></h1>
 <p><%= @article.body %></p>
 <br>
+<h3>Komentarze (<%= @article.comments.count %>)</h3>
+
+<%= render partial: 'articles/comment', collection: @article.comments %>
+
+<%= render partial: 'comments/form' %>
+
 <%= link_to "<< Cofnij do listy artykułów", articles_path %>
 <br>
 <%= link_to "Edytuj artykuł", edit_article_path(@article) %>
