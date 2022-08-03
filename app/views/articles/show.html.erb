@@ -5,6 +5,9 @@
     <%= link_to tag.name, tag_path(tag) %>
   <% end %>
 </p>
+<% if @article.cover_image.attached? %>
+  <%= image_tag @article.cover_image %>
+<% end %>
 <p><%= @article.body %></p>
 <br>
 <h3>Komentarze (<%= @article.comments.count %>)</h3>

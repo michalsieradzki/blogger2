@@ -25,7 +25,10 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
+    
     @article = Article.find(params[:id])
+    Tagging.where(article_id: @article.id).destroy_all
+
     @article.destroy
 
     flash.notice = "Artykuł #{@article.title} został usunięty"
@@ -49,7 +52,7 @@ class ArticlesController < ApplicationController
 private
 
   def strong_article_params
-    params.require(:article).permit(:title, :body, :tag_list)
+    params.require(:article).permit(:title, :body, :tag_list, :cover_image)
   end
 
 end

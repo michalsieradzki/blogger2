@@ -14,6 +14,10 @@
     <%= form.text_area :body %>
   </p>
   <p>
+    <%= form.label 'Obrazek' %>
+    <%= form.file_field :cover_image %>
+  </p>
+  <p>
     <%= form.label :tag_list, 'Tagi' %><br>
     <%= form.text_field :tag_list %>
   </p>
