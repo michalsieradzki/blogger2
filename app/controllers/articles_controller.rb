@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
-  
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+
   def index
     @articles = Article.all
   end
@@ -17,7 +18,7 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = Article.create(strong_article_params)
+    @article = Article.create(strong_article_params.merge(user_id: current_user.id))
   
     flash.notice = "Artykuł #{@article.title} został utworzony"
     
@@ -27,7 +28,8 @@ class ArticlesController < ApplicationController
   def destroy
     
     @article = Article.find(params[:id])
-    Tagging.where(article_id: @article.id).destroy_all
+    
+    #Tagging.where(article_id: @article.id).destroy_all
 
     @article.destroy
 

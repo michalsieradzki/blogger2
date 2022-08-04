@@ -5,7 +5,13 @@
       <li>
         <%= link_to article.title, article_path(article) %>
       </li>
+      
     <% end %>
   </ul>
 <br>
+<% if user_signed_in? %>
   <%= link_to "Utwórz nowy artykuł", new_article_path, class: "new_article" %>
+  <%= button_to "Wyloguj", destroy_user_session_path, method: :delete, class: "logout-button"  %>
+<% else %>
+  <%= link_to "Zaloguj się", user_session_path, class: "logout-button" %>
+<% end %>

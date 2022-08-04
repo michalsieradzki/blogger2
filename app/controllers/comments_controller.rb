@@ -1,7 +1,8 @@
 class CommentsController < ApplicationController
-  
+  before_action ::authenticate_user!, only: [:create]
+
   def create
-    @comment = Comment.new(strong_comment_params)
+    @comment = Comment.new(strong_comment_params.merge(user_id: current_user.id))
     @comment.article_id = params[:article_id]
 
     @comment.save
@@ -12,6 +13,6 @@ class CommentsController < ApplicationController
 
   private
     def strong_comment_params
-      params.require(:comment).permit(:author_name, :body)
+      params.require(:comment).permit(:body)
     end
 end

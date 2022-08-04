@@ -14,10 +14,20 @@
 
 <%= render partial: 'articles/comment', collection: @article.comments %>
 
-<%= render partial: 'comments/form' %>
+<% if user_signed_in? %>
+  <%= render partial: 'comments/form' %>
+<% else %>
+  <%= link_to 'Aby dodać komentarz zaloguj się...', user_session_path %><br><br>
+<% end %>
 
 <%= link_to "<< Cofnij do listy artykułów", articles_path %>
-<br>
-<%= link_to "Edytuj artykuł", edit_article_path(@article) %>
-<br>
-<%= button_to "Usuń artykuł", article_path(@article), method: :delete, form: { data: {turbo_confirm: "Czy napewno usunąć komentarz?"}}%>
+<br><br>
+<% if user_signed_in? %>
+  <%= link_to "Edytuj artykuł", edit_article_path(@article) %>
+  <br><br>
+  <%= button_to "Usuń artykuł", article_path(@article), method: :delete, form: { data: {turbo_confirm: "Czy napewno usunąć komentarz?"}}%>
+<% end %>
+
+<% if user_signed_in? %>
+  <%= button_to "Wyloguj", destroy_user_session_path, method: :delete, class: "logout-button"  %>
+<% end %>
